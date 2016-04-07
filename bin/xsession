@@ -3,6 +3,7 @@
 # Author: Vic Fryzel
 # http://github.com/vicfryzel/xmonad-config
 
+/usr/bin/setxkbmap -option "ctrl:swapcaps"
 
 # Configure PATH so that we can access our scripts below
 PATH=$PATH:~/.cabal/bin:~/.xmonad/bin
@@ -17,12 +18,21 @@ xcompmgr -n &
 # Start the system tray
 tray &
 
-# Start two terminals
-gnome-terminal &
-gnome-terminal &
+# Start dropbox
+dropbox start
+
+# Start terminal
+# gnome-terminal &
 
 # Start a browser
-google-chrome &
+# google-chrome &
+
+# Start emacs daemon
+emacs --daemon &
+emacsclient -c
+
+# set wallpaper
+# feh --bg-scale ~/Pictures/
 
 # Start screensaver
 # Kill gnome-screensaver if started by default
@@ -32,4 +42,14 @@ xscreensaver -no-splash &
 # Start sound server
 pulseaudio --start &
 
-exec ck-launch-session dbus-launch --sh-syntax --exit-with-session xmonad
+# Touchpad settings
+synclient HorizEdgeScroll=0
+synclient VertEdgeScroll=0
+synclient HorizTwoFingerScroll=1
+synclient VertTwoFingerScroll=1
+synclient TapButton1=1
+synclient TapButton2=2
+synclient TapButton3=3
+#synclient MaxSpeed=1.25
+
+exec xmonad
